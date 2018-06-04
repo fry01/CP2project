@@ -5,10 +5,10 @@
  */
 package gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import logic.*;
-
-
 
 /**
  *
@@ -21,10 +21,14 @@ public class ListEmployees extends javax.swing.JFrame {
      */
     public ListEmployees() {
         initComponents();
-        java.awt.Color recursiveBG = new java.awt.Color(240, 240,240);
+        java.awt.Color recursiveBG = new java.awt.Color(240, 240, 240);
         getContentPane().setBackground(recursiveBG);
-      depsLoad();
-           
+        depsLoad();
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
+
     }
 
     /**
@@ -57,7 +61,7 @@ public class ListEmployees extends javax.swing.JFrame {
 
         DeptComboBox.setEditable(true);
         DeptComboBox.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        DeptComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dep1", "Dep2", "Dep3", "DepN" }));
+        DeptComboBox.setMaximumRowCount(100);
         DeptComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DeptComboBoxActionPerformed(evt);
@@ -121,9 +125,9 @@ public class ListEmployees extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DeptComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -148,43 +152,40 @@ private void depsLoad() {
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-                EmpsTextArea.setText(null); //set text area to null
+        EmpsTextArea.setText(null); //set text area to null
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void DeptComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeptComboBoxActionPerformed
         // TODO add your handling code here:
-        if(!HrSystem.getAllDepartments().isEmpty()){
-         EmpsTextArea.setText(null);
-        int depIndex  =0;
-              depIndex  = DeptComboBox.getSelectedIndex();
-        String empsInformation = "";
-        Department dep = HrSystem.getAllDepartments().get(depIndex);
-        ArrayList<Employee> listOfEmployees = dep.getListOfEmployees();
-        if(listOfEmployees.isEmpty())
-        {
-         empsInformation = "This Department has no employees."
-                + "\n";
-        }else{
-            
-            int counter = 0 ;
-            empsInformation = "**List Of Employees**\n"
-                    + "#Name        #ID \n"
-                    + "-----------------------------\n";
-            while(counter < listOfEmployees.size()){
-        
-         empsInformation = empsInformation +listOfEmployees.get(counter).getFirstName() + " "+ listOfEmployees.get(counter).getLastName() + "      " + listOfEmployees.get(counter).getId() +" \n" ;
-        counter++;
+        if (!HrSystem.getAllDepartments().isEmpty()) {
+            EmpsTextArea.setText(null);
+            int depIndex = 0;
+            depIndex = DeptComboBox.getSelectedIndex();
+            String empsInformation = "";
+            Department dep = HrSystem.getAllDepartments().get(depIndex);
+            ArrayList<Employee> listOfEmployees = dep.getListOfEmployees();
+            if (listOfEmployees.isEmpty()) {
+                empsInformation = "This Department has no employees."
+                        + "\n";
+            } else {
+
+                int counter = 0;
+                empsInformation = "**List Of Employees**\n"
+                        + "#Name        #ID \n"
+                        + "-----------------------------\n";
+                while (counter < listOfEmployees.size()) {
+
+                    empsInformation = empsInformation + listOfEmployees.get(counter).getFirstName() + " " + listOfEmployees.get(counter).getLastName() + "      " + listOfEmployees.get(counter).getId() + " \n";
+                    counter++;
+                }
+            }
         }
-        }
-        }
-        
+
     }//GEN-LAST:event_DeptComboBoxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-
-  
         this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -192,7 +193,7 @@ private void depsLoad() {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])  {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

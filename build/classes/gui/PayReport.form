@@ -88,7 +88,6 @@
             </Property>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="i.e.&#xa;Department 1:&#xa;Emp 1 - ID - amount&#xa;Emp 2 - ID - amount&#xa;Total for Department 1: total amount&#xa;&#xa;Department2: &#xa;Emp 3 - ID - amount&#xa;Emp 4 - ID - amount&#xa;Total for Department 2: total amount&#xa;&#xa;Total for company: total amount"/>
           </Properties>
         </Component>
       </SubComponents>

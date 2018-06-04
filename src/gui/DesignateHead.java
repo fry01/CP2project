@@ -5,6 +5,12 @@
  */
 package gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import logic.Department;
+import logic.HrSystem;
+
 /**
  *
  * @author A.A
@@ -18,6 +24,11 @@ public class DesignateHead extends javax.swing.JFrame {
         initComponents();
         java.awt.Color recursiveBG = new java.awt.Color(240, 240,240);
         getContentPane().setBackground(recursiveBG);
+        loadDepartments();
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
     }
 
     /**
@@ -29,43 +40,72 @@ public class DesignateHead extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
+        btnDesignate = new javax.swing.JButton();
+        lblEmpId = new javax.swing.JLabel();
+        cmbDepId = new javax.swing.JComboBox<>();
+        lblDepId = new javax.swing.JLabel();
+        lblInstructionos = new javax.swing.JLabel();
+        cmbEmpID = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
-        jComboBox1.setEditable(true);
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Emp1", "Emp2", "Emp3", "Emp4", "EmpN" }));
+        btnClose.setBackground(new java.awt.Color(255, 153, 153));
+        btnClose.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 153));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setText("Close");
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(0, 0, 204));
+        lblTitle.setText("Designate Department Head");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel1.setText("Designate Department Head");
+        btnDesignate.setBackground(new java.awt.Color(153, 255, 153));
+        btnDesignate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnDesignate.setText("Designate");
+        btnDesignate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesignateActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel2.setText("Employee ID: ");
+        lblEmpId.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lblEmpId.setForeground(new java.awt.Color(255, 0, 0));
+        lblEmpId.setText("Employee ID: ");
 
-        jComboBox2.setEditable(true);
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dep1", "Dep2", "Depn" }));
+        cmbDepId.setEditable(true);
+        cmbDepId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cmbDepId.setMaximumRowCount(100);
+        cmbDepId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDepIdActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel3.setText("Department ID:");
+        lblDepId.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lblDepId.setForeground(new java.awt.Color(255, 0, 0));
+        lblDepId.setText("Department ID:");
 
-        jButton2.setBackground(new java.awt.Color(153, 255, 153));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setText("Assign");
+        lblInstructionos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblInstructionos.setText("* Select a department first to show employees of that department");
+
+        cmbEmpID.setEditable(true);
+        cmbEmpID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cmbEmpID.setMaximumRowCount(100);
+        cmbEmpID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEmpIDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,46 +113,143 @@ public class DesignateHead extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(223, 223, 223)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(lblTitle)
+                .addGap(0, 243, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(311, 311, 311)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnDesignate, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(304, 304, 304))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(86, 86, 86)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblInstructionos)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblDepId)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cmbDepId, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(52, 52, 52)
+                            .addComponent(lblEmpId)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cmbEmpID, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(86, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(jLabel1)
-                .addGap(98, 98, 98)
+                .addComponent(lblTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 235, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51))
+                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDesignate, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(178, 178, 178)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblDepId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbDepId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblEmpId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbEmpID, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
+                    .addComponent(lblInstructionos)
+                    .addContainerGap(179, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cmbDepIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDepIdActionPerformed
+        // TODO add your handling code here:
+        if (this.cmbDepId.getSelectedItem() != null) {
+            Department dp_temp = HrSystem.getAllDepartments().get(this.cmbDepId.getSelectedIndex());
+            this.cmbEmpID.removeAllItems();
+            for (int i = 0; i < HrSystem.getAllEmployees().size(); i++) {
+                if (HrSystem.getAllEmployees().get(i).getDepartment().getId() == dp_temp.getId()) {
+                    String info = HrSystem.getAllEmployees().get(i).getId() + " - "
+                    + HrSystem.getAllEmployees().get(i).getFirstName() + " "
+                    + HrSystem.getAllEmployees().get(i).getLastName();
+                    this.cmbEmpID.addItem(info);
+                }
+            }
+            this.cmbEmpID.setSelectedItem(null);
+        }
+    }//GEN-LAST:event_cmbDepIdActionPerformed
+
+    private void cmbEmpIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEmpIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEmpIDActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+        int reply = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to close this window?",
+                "Warning", JOptionPane.YES_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnDesignateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesignateActionPerformed
+        // TODO add your handling code here:
+         if (this.cmbEmpID.getSelectedItem() != null) {
+            int empId = this.cmbEmpID.getSelectedIndex();
+            int depId = this.cmbDepId.getSelectedIndex();
+
+            if (HrSystem.getAllDepartments().get(depId).getHead() != null) {
+                int reply = JOptionPane.showConfirmDialog(
+                        null, "The department already has a head, are you sure you want to replace?",
+                        "Warning", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                    HrSystem.designateHead(empId, depId);
+                    JOptionPane.showMessageDialog(this, "Employee: " + HrSystem.getAllEmployees().get(empId).getFirstName() + " "
+                            + HrSystem.getAllEmployees().get(empId).getLastName() + " is now the head of "
+                            + HrSystem.getAllDepartments().get(depId).getName() + " Department.", "Designation is successul", 1);
+                    this.cmbDepId.setSelectedItem(null);
+                    this.cmbEmpID.setSelectedItem(null);
+                } else if (reply == JOptionPane.NO_OPTION) {
+                    //do nothing
+                }
+            } else {
+                HrSystem.designateHead(empId, depId);
+                JOptionPane.showMessageDialog(this, "Employee: " + HrSystem.getAllEmployees().get(empId).getFirstName() + " "
+                        + HrSystem.getAllEmployees().get(empId).getLastName() + " is now the head of "
+                        + HrSystem.getAllDepartments().get(depId).getName() + " Department.", "Designation is successul", 1);
+                this.cmbDepId.setSelectedItem(null);
+                this.cmbEmpID.setSelectedItem(null);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select items in both boxes", "Items not Selected", 2);
+        }
+    }//GEN-LAST:event_btnDesignateActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        int reply = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to close this window?",
+                "Warning", JOptionPane.YES_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void loadDepartments() {
+        if (!HrSystem.getAllDepartments().isEmpty()) {
+            for (int i = 0; i < HrSystem.getAllDepartments().size(); i++) {
+                String info = HrSystem.getAllDepartments().get(i).getId() + " - "
+                        + HrSystem.getAllDepartments().get(i).getName();
+                this.cmbDepId.addItem(info);
+            }
+            this.cmbDepId.setSelectedItem(null);
+        }
+        
+
+    }
     /**
      * @param args the command line arguments
      */
@@ -149,12 +286,13 @@ public class DesignateHead extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnDesignate;
+    private javax.swing.JComboBox<String> cmbDepId;
+    private javax.swing.JComboBox<String> cmbEmpID;
+    private javax.swing.JLabel lblDepId;
+    private javax.swing.JLabel lblEmpId;
+    private javax.swing.JLabel lblInstructionos;
+    private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 }

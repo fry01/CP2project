@@ -5,6 +5,13 @@
  */
 package gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import logic.Employee;
+import logic.HrSystem;
+import logic.PayScale;
+
 /**
  *
  * @author A.A
@@ -19,6 +26,12 @@ public class EditEmployee extends javax.swing.JFrame {
         initComponents();
         java.awt.Color recursiveBG = new java.awt.Color(240, 240,240);
         getContentPane().setBackground(recursiveBG);
+        loadEmp();
+        loadPayScale();
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
     }
 
     /**
@@ -33,90 +46,103 @@ public class EditEmployee extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
+        lblEmpId = new javax.swing.JLabel();
+        cmbEmpId = new javax.swing.JComboBox<>();
+        lblFName = new javax.swing.JLabel();
+        txtFName = new javax.swing.JTextField();
+        lblGender = new javax.swing.JLabel();
+        txtLName = new javax.swing.JTextField();
+        lblAddress = new javax.swing.JLabel();
+        txtAddress = new javax.swing.JTextField();
+        lblPayLevel = new javax.swing.JLabel();
+        lblLName = new javax.swing.JLabel();
+        rdbtnMale = new javax.swing.JRadioButton();
+        rdbtnFemale = new javax.swing.JRadioButton();
+        btnClose = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        cmbPayScale = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manage Employees");
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel1.setText("Edit Information of Employee");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel2.setText("Employee ID: ");
-
-        jComboBox1.setEditable(true);
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Emp1", "Emp2", "Emp3", "Emp4", "EmpN" }));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel3.setText("First Name: ");
-        jLabel3.setToolTipText("");
-
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField1.setText("i.e. Abdulla\n");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel4.setText("Gender: ");
-        jLabel4.setToolTipText("");
-
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField2.setText("i.e. AlHassan");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel5.setText("Address: ");
-        jLabel5.setToolTipText("");
-
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField3.setText("i.e. Manama, 1023, 453\n");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel6.setText("Pay Level: ");
-        jLabel6.setToolTipText("");
-
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField4.setText("i.e. 3");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel7.setText("Last Name: ");
-        jLabel7.setToolTipText("");
-
-        buttonGroup2.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jRadioButton1.setText("Male");
-
-        buttonGroup2.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jRadioButton2.setText("Female");
-
-        jButton1.setBackground(new java.awt.Color(255, 153, 153));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setText("Close");
-
-        jButton2.setBackground(new java.awt.Color(153, 255, 153));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setText("Save");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
+
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(0, 0, 204));
+        lblTitle.setText("Edit Information of Employee");
+
+        lblEmpId.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lblEmpId.setForeground(new java.awt.Color(255, 0, 0));
+        lblEmpId.setText("Employee ID: ");
+
+        cmbEmpId.setEditable(true);
+        cmbEmpId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cmbEmpId.setMaximumRowCount(100);
+        cmbEmpId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEmpIdActionPerformed(evt);
+            }
+        });
+
+        lblFName.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lblFName.setText("First Name: ");
+        lblFName.setToolTipText("");
+
+        txtFName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        lblGender.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lblGender.setText("Gender: ");
+        lblGender.setToolTipText("");
+
+        txtLName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        lblAddress.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lblAddress.setText("Address: ");
+        lblAddress.setToolTipText("");
+
+        txtAddress.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        lblPayLevel.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lblPayLevel.setText("Pay Level: ");
+        lblPayLevel.setToolTipText("");
+
+        lblLName.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lblLName.setText("Last Name: ");
+        lblLName.setToolTipText("");
+
+        buttonGroup2.add(rdbtnMale);
+        rdbtnMale.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        rdbtnMale.setText("Male");
+
+        buttonGroup2.add(rdbtnFemale);
+        rdbtnFemale.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        rdbtnFemale.setText("Female");
+
+        btnClose.setBackground(new java.awt.Color(255, 153, 153));
+        btnClose.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+
+        btnSave.setBackground(new java.awt.Color(153, 255, 153));
+        btnSave.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        cmbPayScale.setEditable(true);
+        cmbPayScale.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cmbPayScale.setMaximumRowCount(100);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,7 +150,7 @@ public class EditEmployee extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(258, 258, 258)
-                .addComponent(jLabel1)
+                .addComponent(lblTitle)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(114, Short.MAX_VALUE)
@@ -132,89 +158,201 @@ public class EditEmployee extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                                .addComponent(lblLName)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtLName, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(lblFName)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtFName, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(lblPayLevel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cmbPayScale, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(lblAddress)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(66, 66, 66))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(lblEmpId)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbEmpId, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(265, 265, 265))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(62, 62, 62)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(lblGender)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rdbtnMale, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton2)))
+                                .addComponent(rdbtnFemale)))
                         .addGap(292, 292, 292))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addComponent(jLabel1)
+                .addComponent(lblTitle)
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblEmpId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEmpId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblFName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)))
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtLName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblLName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(46, 46, 46)
+                        .addComponent(lblPayLevel)
+                        .addComponent(cmbPayScale, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(lblGender)
+                    .addComponent(rdbtnMale)
+                    .addComponent(rdbtnFemale))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if (this.cmbEmpId.getSelectedItem() != null) {
+            int temp_index = this.cmbEmpId.getSelectedIndex();
+            if (this.txtFName.getText() != null && this.txtFName.getText().length() > 2) {
+                if (this.txtLName.getText() != null && this.txtLName.getText().length() > 2) {
+                    if (this.txtAddress.getText() != null && this.txtAddress.getText().length() > 2) {
+                        if (this.cmbPayScale.getSelectedIndex() >= 0) {
+                            if (this.rdbtnFemale.isSelected() || this.rdbtnMale.isSelected()) {
+                                int indx = this.cmbEmpId.getSelectedIndex();
+                                String f_name = this.txtFName.getText();
+                                String l_name = this.txtLName.getText();
+                                String adress = this.txtAddress.getText();
+                                int payScale_indx = this.cmbPayScale.getSelectedIndex();
+                                char gender = 0;
+                                if (this.rdbtnFemale.isSelected()) {
+                                    gender = 'F';
+                                }
+                                if (this.rdbtnMale.isSelected()) {
+                                    gender = 'M';
+                                }
+                                HrSystem.editEmployee(indx, f_name, l_name, adress, gender, payScale_indx);
+                                JOptionPane.showMessageDialog(this,
+                                        "The updates have been saved successfully for employee "
+                                        + HrSystem.getAllEmployees().get(temp_index).getFirstName() + " "
+                                        + HrSystem.getAllEmployees().get(temp_index).getLastName() + ".",
+                                        "Updated",
+                                        JOptionPane.PLAIN_MESSAGE);
+                                this.cmbEmpId.setSelectedItem(null);
+                                this.cmbPayScale.setSelectedItem(null);
+                                this.txtFName.setText(null);
+                                this.txtLName.setText(null);
+                                this.txtAddress.setText(null);
+                                this.rdbtnFemale.setSelected(false);
+                                this.rdbtnMale.setSelected(false);
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Please select either one of the genders", "Error", 2);
+                            }
 
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Please select a payscale level from combo box", "Error", 2);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Please eneter an address", "Error", 2);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Please enter a last name that is longer than two characters", "Error", 2);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Please enter a first name that is longer than two characters", "Error", 2);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select an employee from combo box", "Error", 2);
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void cmbEmpIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEmpIdActionPerformed
+        // TODO add your handling code here:
+        if (this.cmbEmpId.getSelectedItem() != null) {
+            Employee temp_emp = HrSystem.getAllEmployees().get(this.cmbEmpId.getSelectedIndex());
+            this.txtFName.setText(temp_emp.getFirstName());
+            this.txtLName.setText(temp_emp.getLastName());
+            this.txtAddress.setText(temp_emp.getAddress());
+            if (temp_emp.getGender() == 'M' || temp_emp.getGender() == 'm') {
+                this.rdbtnMale.setSelected(true);
+            } else {
+                this.rdbtnFemale.setSelected(true);
+            }
+            this.cmbPayScale.setSelectedIndex((temp_emp.getPayLevel().getId() - 1));
+        }
+    }//GEN-LAST:event_cmbEmpIdActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+        int reply = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to close this window?",
+                "Warning", JOptionPane.YES_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        int reply = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to close this window?",
+                "Warning", JOptionPane.YES_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    
+    private void loadEmp() {
+        this.cmbEmpId.removeAllItems();
+        for (int i = 0; i < HrSystem.getAllEmployees().size(); i++) {
+            String info = HrSystem.getAllEmployees().get(i).getId() + " - "
+                    + HrSystem.getAllEmployees().get(i).getFirstName() + " "
+                    + HrSystem.getAllEmployees().get(i).getLastName();
+            this.cmbEmpId.addItem(info);
+        }
+        this.cmbEmpId.setSelectedItem(null);
+    }
+
+    private void loadPayScale() {
+        this.cmbPayScale.removeAllItems();
+        for (int i = 0; i < HrSystem.getPayScales().size(); i++) {
+            PayScale temp_pay = HrSystem.getPayScales().get(i);
+            String payScale = temp_pay.getId() + " - " + temp_pay.getValue();
+            this.cmbPayScale.addItem(payScale);
+        }
+        this.cmbPayScale.setSelectedItem(null);
+    }
     /**
      * @param args the command line arguments
      */
@@ -252,24 +390,24 @@ public class EditEmployee extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnSave;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JComboBox<String> cmbEmpId;
+    private javax.swing.JComboBox<String> cmbPayScale;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lblAddress;
+    private javax.swing.JLabel lblEmpId;
+    private javax.swing.JLabel lblFName;
+    private javax.swing.JLabel lblGender;
+    private javax.swing.JLabel lblLName;
+    private javax.swing.JLabel lblPayLevel;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JRadioButton rdbtnFemale;
+    private javax.swing.JRadioButton rdbtnMale;
+    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtFName;
+    private javax.swing.JTextField txtLName;
     // End of variables declaration//GEN-END:variables
 }

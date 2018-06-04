@@ -5,6 +5,9 @@
  */
 package gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 /**
  *
  * @author 201601016
@@ -16,6 +19,10 @@ public class PayReport extends javax.swing.JFrame {
      */
     public PayReport() {
         initComponents();
+         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
     }
 
     /**
@@ -44,7 +51,6 @@ public class PayReport extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 17)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("i.e.\nDepartment 1:\nEmp 1 - ID - amount\nEmp 2 - ID - amount\nTotal for Department 1: total amount\n\nDepartment2: \nEmp 3 - ID - amount\nEmp 4 - ID - amount\nTotal for Department 2: total amount\n\nTotal for company: total amount");
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton2.setBackground(new java.awt.Color(153, 255, 153));

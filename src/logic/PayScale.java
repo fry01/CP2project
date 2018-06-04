@@ -14,6 +14,20 @@ import java.io.Serializable;
 public class PayScale implements Serializable {
     static private int idCounter = 0;
     private int id ;
+    private double value;
+
+    public PayScale(int id, double value) {
+        this.id = id;
+        this.value = value;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
     
     public PayScale(){
     this.id = idCounter;

@@ -5,6 +5,8 @@
  */
 package gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import logic.*;
 
@@ -13,14 +15,18 @@ import logic.*;
  * @author A.A
  */
 public class AddDepartment extends javax.swing.JFrame {
-     
+
     /**
      * Creates new form AddDepartment
      */
     public AddDepartment() {
         initComponents();
-        java.awt.Color recursiveBG = new java.awt.Color(240, 240,240);
-        
+        java.awt.Color recursiveBG = new java.awt.Color(240, 240, 240);
+        getContentPane().setBackground(recursiveBG);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
     }
 
     /**
@@ -34,13 +40,13 @@ public class AddDepartment extends javax.swing.JFrame {
 
         jDialog1 = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        depLocationField = new javax.swing.JTextField();
-        depNameField = new javax.swing.JTextField();
+        lblDepId = new javax.swing.JLabel();
+        btnClose = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        lblDepLocation = new javax.swing.JLabel();
+        lblDepName = new javax.swing.JLabel();
+        txtdepLocation = new javax.swing.JTextField();
+        txtDepName = new javax.swing.JTextField();
         depIdField = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -60,39 +66,39 @@ public class AddDepartment extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 204));
         jLabel1.setText("Add Department");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel2.setText("Department ID: ");
+        lblDepId.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lblDepId.setForeground(new java.awt.Color(255, 0, 0));
+        lblDepId.setText("Department ID: ");
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 153));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setText("Close");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnClose.setBackground(new java.awt.Color(255, 153, 153));
+        btnClose.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCloseActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(153, 255, 153));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setText("Add");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setBackground(new java.awt.Color(153, 255, 153));
+        btnAdd.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel8.setText("Department Location: ");
-        jLabel8.setToolTipText("");
+        lblDepLocation.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lblDepLocation.setText("Department Location: ");
+        lblDepLocation.setToolTipText("");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel9.setText("Department Name: ");
-        jLabel9.setToolTipText("");
+        lblDepName.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        lblDepName.setText("Department Name: ");
+        lblDepName.setToolTipText("");
 
-        depLocationField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtdepLocation.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        depNameField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtDepName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         depIdField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         depIdField.setText("(Auto Generated)");
@@ -111,9 +117,9 @@ public class AddDepartment extends javax.swing.JFrame {
                 .addContainerGap(260, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(67, 67, 67)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(286, 286, 286))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -122,18 +128,18 @@ public class AddDepartment extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
+                                    .addComponent(lblDepLocation)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel9)
+                                    .addComponent(lblDepName)
                                     .addGap(30, 30, 30)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblDepId, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(44, 44, 44)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(depIdField, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                            .addComponent(depNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                            .addComponent(depLocationField, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(txtDepName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                            .addComponent(txtdepLocation, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(239, 239, 239))))
         );
         layout.setVerticalGroup(
@@ -143,83 +149,79 @@ public class AddDepartment extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(depNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDepName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDepName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(depLocationField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDepLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtdepLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDepId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(depIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        
-        if(depNameField.getText().isEmpty()){
-        
-        JOptionPane.showMessageDialog(null,
-                            "Department Name is Empty", "Error",
-                            JOptionPane.ERROR_MESSAGE);
-        }else if(depNameField.getText().length() < 3){
-         JOptionPane.showMessageDialog(null,
-                            "Department Name is Invalid", "Error",
-                            JOptionPane.ERROR_MESSAGE);
-        
-        }else if(depNameField.getText().length() > 3 && !depNameField.getText().isEmpty() ){
-        
-        String depName = depNameField.getText();
-        
-        if(depLocationField.getText().isEmpty()){
-        
-        JOptionPane.showMessageDialog(null,
-                            "Department Location is Empty", "Error",
-                            JOptionPane.ERROR_MESSAGE);
-        }else if(depLocationField.getText().length() < 3){
-         JOptionPane.showMessageDialog(null,
-                            "Department Location is Invalid", "Error",
-                            JOptionPane.ERROR_MESSAGE);
-        
-        }else if(depLocationField.getText().length() > 3 && !depLocationField.getText().isEmpty() ){
-        
-        String depLocation = depLocationField.getText();
-        
-        int depId = HrSystem.addDepartment(depName,depLocation);
-        depIdField.setText(Integer.toString(depId));
-        JOptionPane.showMessageDialog(null,
-                            "Department added successfully", "Success",
-                            JOptionPane.INFORMATION_MESSAGE);
-        
+
+        if (txtDepName.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Department Name is Empty", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (txtDepName.getText().length() < 3) {
+            JOptionPane.showMessageDialog(null,
+                    "Department Name is Invalid", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+
+        } else if (txtDepName.getText().length() > 3 && !txtDepName.getText().isEmpty()) {
+
+            String depName = txtDepName.getText();
+
+            if (txtdepLocation.getText().isEmpty()) {
+
+                JOptionPane.showMessageDialog(null,
+                        "Department Location is Empty", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } else if (txtdepLocation.getText().length() < 3) {
+                JOptionPane.showMessageDialog(null,
+                        "Department Location is Invalid", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+
+            } else if (txtdepLocation.getText().length() > 3 && !txtdepLocation.getText().isEmpty()) {
+
+                String depLocation = txtdepLocation.getText();
+
+                int depId = HrSystem.addDepartment(depName, depLocation);
+                depIdField.setText(Integer.toString(depId));
+                JOptionPane.showMessageDialog(null,
+                        "Department added successfully", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+            }
         }
-        }
-        
-        
-        
-        
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+
+
+    }//GEN-LAST:event_btnAddActionPerformed
 
     private void depIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depIdFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_depIdFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         // TODO add your handling code here:
-        
-       
+
         this.dispose();
         //dfsdf
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,15 +259,15 @@ public class AddDepartment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnClose;
     private javax.swing.JTextField depIdField;
-    private javax.swing.JTextField depLocationField;
-    private javax.swing.JTextField depNameField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblDepId;
+    private javax.swing.JLabel lblDepLocation;
+    private javax.swing.JLabel lblDepName;
+    private javax.swing.JTextField txtDepName;
+    private javax.swing.JTextField txtdepLocation;
     // End of variables declaration//GEN-END:variables
 }
